@@ -1,3 +1,10 @@
+# generate gemfile.lock
+#   docker-compose run app bundle install
+# uncomment and rebuild image
+#   docker-compose build app
+# boostrap rails app
+#   docker-compose run --user "1000:$(id -g)" app rails new --skip-bundle .
+
 # base image
 FROM ruby:2.3
 
@@ -13,7 +20,7 @@ RUN bundle config --global frozen 1
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-# isntall required gems from gemfile
+# install required gems from gemfile
 COPY Gemfile /usr/src/app/
 COPY Gemfile.lock /usr/src/app/
 RUN bundle install

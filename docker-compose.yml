@@ -4,17 +4,19 @@ services:
   app:
     build: .
     volumes:
-      - ./:/usr/src/app
+      - .:/usr/src/app
     ports:
       - 3000:3000
+    environment:
+      HELLO_APP_DB_HOST: postgres
+      HELLO_APP_DB_USER: user
+      HELLO_APP_DB_PASSWORD: password
+      HELLO_APP_DB_NAME: database
   postgres:
     image: postgres:9.5.2
-    container_name: postgres-rails
-    #net: host
     ports:
       - 5432:5432
     volumes:
-      # mount database:
       - ./.pgdata:/var/lib/postgresql
     environment:
       POSTGRES_USER: user
